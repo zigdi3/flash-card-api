@@ -1,4 +1,4 @@
 src/*.ts linguist-vendored=false
 test/*.ts linguist-vendored=false
-assets/*.css linguist-vendored=true
+assets/swagger/*.css linguist-vendored=true
 *.js linguist-vendored=false
