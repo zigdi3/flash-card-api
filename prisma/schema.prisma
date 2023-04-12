@@ -11,10 +11,10 @@ generator client {
 }
 
 model FlashCard {
-  id    Int     @default(autoincrement()) @id
+  id String @default(uuid()) @id
   name String?   
   linkedlnUrl String?
   gitHubUrl  String? 
-  createAt DateTime
-  updateAt DateTime
+  createAt DateTime @default(now())
+  updateAt DateTime?
 }

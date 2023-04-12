@@ -1,17 +1,19 @@
-import { FlashCardService } from './modules/flash-card/flash-card.service';
-import { FlashCardModule } from './modules/flash-card/flash-card.module';
-import { FlashCardController } from './modules/flash-card/flash-card.controller';
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './modules/infra';
+import { FlashCardModule } from './modules/flash-card/flash-card.module';
+import { Module } from '@nestjs/common';
+import { HttpModule } from '@nestjs/axios';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
   imports: [
-    FlashCardModule, PrismaModule, ],
-  controllers: [
-    FlashCardController, AppController],
-  providers: [
-    FlashCardService, AppService],
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    //Http request
+    HttpModule,
+    FlashCardModule,
+    PrismaModule
+  ]
 })
 export class AppModule { }
