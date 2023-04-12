@@ -8,13 +8,9 @@ import { FlashCard } from '@prisma/client';
 import { FlashCardRepository } from './flash-card.repository';
 import { ObjectId } from 'bson';
 
-
 @Injectable()
 export class FlashCardService {
-  constructor(private service: FlashCardRepository) {
-
-
-  }
+  constructor(private service: FlashCardRepository) { }
 
   async getAllFlashCards(): Promise<FlashCard[]> {
     return this.service.findAll();
@@ -26,11 +22,10 @@ export class FlashCardService {
     return this.service.create({
       id: id,
       name: data?.name,
-      linkedlnUrl: data?.linkedlnUrl,
+      linkedlnUrl: data?.linkedinUrl,
       gitHubUrl: data?.gitHubUrl,
       createAt: new Date(),
-      updateAt: null
-    })
-
+      updateAt: null,
+    });
   }
 }
