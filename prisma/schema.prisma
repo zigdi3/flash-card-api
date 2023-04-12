@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "sqlite"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
@@ -11,7 +11,7 @@ generator client {
 }
 
 model FlashCard {
-  id String @default(uuid()) @id
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name String?   
   linkedlnUrl String?
   gitHubUrl  String? 

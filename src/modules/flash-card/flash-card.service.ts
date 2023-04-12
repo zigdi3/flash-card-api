@@ -6,7 +6,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateFlashCardDto } from './dtos/create-flash-card.dto';
 import { FlashCard } from '@prisma/client';
 import { FlashCardRepository } from './flash-card.repository';
-import { v4 as uuidv4 } from 'uuid';
+import { ObjectId } from 'bson';
 
 
 @Injectable()
@@ -21,9 +21,10 @@ export class FlashCardService {
   }
 
   save(data: CreateFlashCardDto): Promise<FlashCard> {
-    const uuid = uuidv4();
+    const id = new ObjectId().toString();
+
     return this.service.create({
-      id: uuid,
+      id: id,
       name: data?.name,
       linkedlnUrl: data?.linkedlnUrl,
       gitHubUrl: data?.gitHubUrl,
