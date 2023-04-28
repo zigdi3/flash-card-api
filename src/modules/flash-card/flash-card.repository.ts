@@ -1,11 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { FlashCard } from '@prisma/client';
 import { PrismaService } from '../infra';
+import { ObjectId } from 'bson';
 
 @Injectable()
 export class FlashCardRepository {
   constructor(private repo: PrismaService) { }
 
+  async findById(id: string): Promise<FlashCard[]> {
+    const result = [];
+    result.push(await this.repo.prisma.flashCard.findFirst(
+      {
+        where: { id: id }
+      }
+    )
+    );
+    return result;
+  }
   async findAll(): Promise<FlashCard[]> {
     return this.repo.prisma.flashCard.findMany();
   }

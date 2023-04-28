@@ -16,6 +16,10 @@ export class FlashCardService {
     return this.service.findAll();
   }
 
+  async getById(id: string): Promise<FlashCard[]> {
+    return this.service.findById(id);
+  }
+
   save(data: CreateFlashCardDto): Promise<FlashCard> {
     const id = new ObjectId().toString();
 

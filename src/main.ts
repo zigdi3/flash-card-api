@@ -13,7 +13,7 @@ const core = new AppService();
 async function bootstrap() {
 
   // create app
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
 
   //start app
   const port = 3131;
