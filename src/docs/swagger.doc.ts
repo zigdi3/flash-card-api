@@ -42,7 +42,7 @@ export class SwaggerDoc {
       customSiteTitle: 'API Buzzvel',
     } as ExpressSwaggerCustomOptions;
 
-    SwaggerModule.setup('docs', app, document, options);
+    SwaggerModule.setup('api-docs', app, document, options);
     // generate swagger json
     // fs.writeFileSync('./swagger-docs.json', JSON.stringify(document));
   };

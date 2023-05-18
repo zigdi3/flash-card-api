@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppService } from './app.service';
+import { initializeMiddlewares } from './core/middlewares';
 
 
 //pre initialiaze
@@ -14,6 +15,9 @@ async function bootstrap() {
 
   // create app
   const app = await NestFactory.create(AppModule, { cors: true });
+
+  //config middlwares
+  initializeMiddlewares(app);
 
   //start app
   const port = 3131;
