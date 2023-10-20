@@ -1,20 +1,21 @@
 # Set base image to alpine
-FROM node:18.12.1-alpine
-
-# Install Node.js and NPM
-RUN apk add --no-cache nodejs npm
+FROM node:18-alpine AS builder
+RUN apk add --update nodejs npm
 
 # Set working directory
-WORKDIR /src
+WORKDIR /app
 
 # Copy package.json and package-lock.json
 COPY package*.json ./ ./
+COPY prisma ./prisma/
 
 # Install dependencies
-RUN npm install --legacy-peer-deps
-
+#RUN npm install @nestjs/core
+RUN yarn install 
 # Copy source code
 COPY . .
+
+RUN yarn build
 
 # Build Arguments
 ARG DATABASE_URL 
@@ -23,7 +24,9 @@ ARG DATABASE_URL
 ENV DATABASE_URL=${DATABASE_URL}
 ENV PORT=3131
 
-
+#COPY --from=builder /app/node_modules ./node_modules
+#COPY --from=builder /app/package*.json ./
+#COPY --from=builder /app/dist ./dist
 
 # Install Prisma CLI
 #RUN npm install -g prisma
@@ -34,7 +37,7 @@ ENV PORT=3131
 # Run Prisma migrations
 #RUN npx prisma migrate deploy
 
-EXPOSE $PORT
+EXPOSE 3131
 
-HEALTHCHECK CMD curl --fail http://localhost:3131 || exit 1 
-CMD ["npm", "start", "--port", "$PORT"]
+#HEALTHCHECK CMD curl --fail http://localhost:3131 || exit 1 
+CMD ["node", "dist/main.js"]

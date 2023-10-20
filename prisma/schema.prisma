@@ -1,20 +1,21 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
 model FlashCard {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String?   
+  id          String @id @default(cuid())
+  gitHubUrl   String?
   linkedlnUrl String?
-  gitHubUrl  String? 
-  createAt DateTime @default(now())
-  updateAt DateTime?
+  name        String?   @unique
+  createAt    DateTime  @db.Date
+  updateAt    DateTime? @db.Date
+  qrCodeData  String?
 }

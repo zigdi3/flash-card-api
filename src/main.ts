@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppService } from './app.service';
 import { initializeMiddlewares } from './core/middlewares';
+import { TimeoutInterceptor } from './shared/time-out-interceptor';
 
 
 //pre initialiaze
@@ -15,6 +16,7 @@ async function bootstrap() {
 
   // create app
   const app = await NestFactory.create(AppModule, { cors: true });
+  //app.useGlobalInterceptors(new TimeoutInterceptor());
 
   //config middlwares
   initializeMiddlewares(app);

@@ -1,0 +1,19 @@
+version: '3.8'
+
+name: prisma-prisma
+
+services:
+    postgres_isolated:
+    image: postgres:10
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=test
+      - POSTGRES_USER=flash
+      - POSTGRES_PASSWORD=flashroot
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: ['CMD', 'pg_isready']
+      interval: 5s
+      timeout: 2s
+      retries: 20

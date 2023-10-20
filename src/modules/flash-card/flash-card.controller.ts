@@ -2,7 +2,7 @@
 https://docs.nestjs.com/controllers#controllers
 */
 
-import { Controller, Get, Param, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateFlashCardDto } from './dtos/create-flash-card.dto';
 import { FlashCardService } from './flash-card.service';
@@ -15,20 +15,25 @@ export class FlashCardController {
 
   }
 
-  @Post('save')
+  @Post('/save')
   save(@Body() data: CreateFlashCardDto) {
 
     return this.service.save(data);
   }
 
-  @Get()
-  getAllFlashCards() {
+  @Get('/create-qr')
+  toqrCode(@Query() name: string): Promise<any> {
+    return this.service.toQuantumRead(name);
+  }
 
+  @Get('/list')
+  getAllFlashCards() {
     return this.service.getAllFlashCards();
   }
   @Get(':id')
   getById(@Param('id') flashCardId: string) {
     return this.service.getById(flashCardId);
   }
+
 
 }
