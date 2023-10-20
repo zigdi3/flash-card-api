@@ -30,17 +30,19 @@ export class FlashCardRepository {
   }
 
   async findAll(): Promise<FlashCard[]> {
-    return this.repo.prisma.flashCard.findMany();
+    return await this.repo.prisma.flashCard.findMany();
   }
 
   async create(data: FlashCard): Promise<FlashCard> {
-    return this.repo.prisma.flashCard.create({
-      data,
-    });
+    // const new_id = new ObjectId();
+    return await this.repo.prisma.flashCard.create({
+      data
+    }
+    );
   }
 
-  async delete(id: string): Promise<FlashCard> {
-    return this.repo.prisma.flashCard.delete({
+  async delete(id: any): Promise<FlashCard> {
+    return await this.repo.prisma.flashCard.delete({
       where: { id },
     });
   }

@@ -1,5 +1,7 @@
+import { ObjectId } from 'bson';
+
 export class CreateFlashCardDto {
-  id?: string;
+  id?: ObjectId;
   name?: string;
   linkedlnUrl?: string;
   gitHubUrl?: string;

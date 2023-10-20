@@ -22,9 +22,9 @@ export class FlashCardService {
   }
 
   save(data: CreateFlashCardDto): Promise<FlashCard> {
-    let id = uuid();
+    let newId = new ObjectId();
     return this.service.create({
-      id: id,
+      id: newId.toString(),
       name: data?.name,
       linkedlnUrl: data?.linkedlnUrl,
       gitHubUrl: data?.gitHubUrl,

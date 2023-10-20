@@ -6,12 +6,12 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "mongodb"
+  url      = env("DB_URI")
 }
 
 model FlashCard {
-  id          String @id @default(cuid())
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
   gitHubUrl   String?
   linkedlnUrl String?
   name        String?   @unique

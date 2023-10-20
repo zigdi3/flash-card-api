@@ -18,10 +18,10 @@ COPY . .
 RUN yarn build
 
 # Build Arguments
-ARG DATABASE_URL 
+ARG DB_URI 
 
 # Set environment variables
-ENV DATABASE_URL=${DATABASE_URL}
+ENV DB_URI=${DB_URI}
 ENV PORT=3131
 
 #COPY --from=builder /app/node_modules ./node_modules
