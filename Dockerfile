@@ -40,5 +40,5 @@ ENV PORT=3131
 EXPOSE 3131
 
 HEALTHCHECK CMD curl --fail http://localhost:3131 || exit 1 
-CMD ["yarn", "run", "start"]
+CMD ["yarn", "run", "prod"]
 
