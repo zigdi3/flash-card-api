@@ -25,7 +25,7 @@ export class FlashCardController {
   toqrCode(@Query() name: string): Promise<any> {
     return this.service.toQuantumRead(name);
   }
-  @UseInterceptors(ClassSerializerInterceptor)
+
   @Get('/list')
   getAllFlashCards() {
     return this.service.getAllFlashCards();
