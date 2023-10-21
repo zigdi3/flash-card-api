@@ -2,7 +2,7 @@
 https://docs.nestjs.com/controllers#controllers
 */
 
-import { Controller, Get, Param, Post, Body, Query } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Query, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateFlashCardDto } from './dtos/create-flash-card.dto';
 import { FlashCardService } from './flash-card.service';
@@ -25,7 +25,7 @@ export class FlashCardController {
   toqrCode(@Query() name: string): Promise<any> {
     return this.service.toQuantumRead(name);
   }
-
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get('/list')
   getAllFlashCards() {
     return this.service.getAllFlashCards();

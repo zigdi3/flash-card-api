@@ -41,6 +41,7 @@
     "qrcode": "^1.5.3",
     "random-uuid-v4": "^0.0.9",
     "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.8.1",
     "supertest": "^6.3.3",
     "swagger-ui-express": "^4.6.1",
     "ts-node": "^10.9.1",
