@@ -11,7 +11,7 @@ COPY prisma ./prisma/
 
 # Install dependencies
 #RUN npm install @nestjs/core
-RUN yarn install 
+RUN yarn install --legacy-peer-deps
 # Copy source code
 COPY . .
 
