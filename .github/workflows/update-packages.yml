@@ -13,19 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js ⚙️
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18.x'
-
-      - name: Upgrade packages 🔀
-        run: npm update --legacy-peer-deps
-
       - name: Commit and create PR 🔀
-        uses: msudgh/actions-npm-check-updates@v0.1.1
+        uses: zigdi3/pull-request-updater@v0.2.1
         with:
           title: 'build(deps): Upgrade NPM packages (automated)'
           branch: 'build-deps-upgrade-npm-packages-automated'
