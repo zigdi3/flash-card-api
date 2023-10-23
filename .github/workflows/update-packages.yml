@@ -22,7 +22,7 @@ jobs:
           node-version: '18.x'
 
       - name: Upgrade packages 🔀
-        run: npm update
+        run: npm update --legacy-peer-deps
 
       - name: Commit and create PR 🔀
         uses: zigdi3/pull-request-updater@v0.1.1
