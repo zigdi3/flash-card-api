@@ -25,7 +25,7 @@ jobs:
         run: npm update
 
       - name: Commit and create PR 🔀
-        uses: BaharaJr/create-pr@0.0.1
+        uses: zigdi3/pull-request-updater@v0.1.0
         with:
           title: 'build(deps): Upgrade NPM packages (automated)'
           branch: 'build-deps-upgrade-npm-packages-automated'
