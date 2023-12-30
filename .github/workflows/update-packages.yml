@@ -13,5 +13,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ⚙️
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+          
+      - name: Clean cache
+        run: npm cache clean --force
+        
+      - name: Upgrade packages 🔀
+        run: npm update
+
       - name: Commit and create PR 🔀
-        uses: zigdi3/pull-request-updater@0.2.1
+        uses: diego-araujo/create-pull-request@v3
+        with:
+          title: 'build(deps): Upgrade NPM packages (automated)'
+          branch: 'build-deps-upgrade-npm-packages-automated'
+          commit-message: 'build(deps): upgrade NPM packages (automated)'
