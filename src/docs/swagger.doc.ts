@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import {
   DocumentBuilder,
-  ExpressSwaggerCustomOptions,
+  SwaggerCustomOptions,
   SwaggerModule,
 } from '@nestjs/swagger';
 import * as fs from 'fs';
@@ -40,7 +40,7 @@ export class SwaggerDoc {
       customCss: fs.readFileSync(cssFile, { encoding: 'utf-8' }),
       // customfavIcon: favicon,
       customSiteTitle: 'API Buzzvel',
-    } as ExpressSwaggerCustomOptions;
+    } as SwaggerCustomOptions;
 
     SwaggerModule.setup('api-docs', app, document, options);
     // generate swagger json
