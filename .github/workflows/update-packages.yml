@@ -26,7 +26,7 @@ jobs:
         run: npm cache clean --force
         
       - name: Upgrade packages 🔀
-        run: npm update
+        run: npm update --legacy-peer-deps
 
       - name: Commit and create PR 🔀
         uses: zigdi3/pull-request-updater@0.2.1
