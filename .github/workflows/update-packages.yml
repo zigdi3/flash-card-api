@@ -22,14 +22,11 @@ jobs:
         with:
           node-version: '18.x'
           
-      - name: Clean cache
-        run: npm cache clean --force
-        
       - name: Upgrade packages 🔀
         run: npm update 
-      
-      - name: Run audit
-        run: npm audit fix
+
+      - name: Clean cache
+        run: npm cache clean --force
 
       - name: Commit and create PR 🔀
         uses: zigdi3/pull-request-updater@0.2.1
