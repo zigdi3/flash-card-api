@@ -20,7 +20,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '18.x'
-
+          
+      - name: Clean cache
+        run: npm cache clean --force
+        
       - name: Upgrade packages 🔀
         run: npm update
 
