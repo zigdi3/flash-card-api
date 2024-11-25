@@ -1,7 +1,7 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import axios from 'axios';
 
-const url = `https://flashcard-crm.onrender.com/api-docs/`; // Replace with your Render URL
+const url = `https://flash-card-api.onrender.com/api-docs/`; // Replace with your Render URL
 const interval = 300000; // Interval in milliseconds (5 minutes)
 
 @Injectable()
