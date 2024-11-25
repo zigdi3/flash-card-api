@@ -4,16 +4,16 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppService } from './app.service';
 import { initializeMiddlewares } from './core/middlewares';
 import { TimeoutInterceptor } from './shared/time-out-interceptor';
-
+import { SpinUpService } from './modules/infra/spinUp';
 
 //pre initialiaze
 const core = new AppService();
 
+const spin = new SpinUpService();
 /**
  * Start app
  */
 async function bootstrap() {
-
   // create app
   const app = await NestFactory.create(AppModule, { cors: true });
   //app.useGlobalInterceptors(new TimeoutInterceptor());
@@ -23,12 +23,10 @@ async function bootstrap() {
 
   //start app
   const port = 3131;
-  await app.listen(port, () =>
+  await app.listen(port, () => {
     // logger.log(`Application is running on: ${await app.getUrl()}`);
-    console.log(
-      `API running on port: ${port} `,
-    ),
-  );
+    console.log(`API running on port: ${port} `), spin.reloadWebsite();
+  });
 }
 //run app
 bootstrap();
