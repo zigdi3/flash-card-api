@@ -2,7 +2,7 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import axios from 'axios';
 
 const url = `https://flash-card-api.onrender.com/api-docs/`; // Replace with your Render URL
-const interval = 300000; // Interval in milliseconds (5 minutes)
+const interval = 180000; // Interval in milliseconds (5 minutes)
 
 @Injectable()
 export class SpinUpService implements OnModuleInit {
