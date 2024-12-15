@@ -1,5 +1,5 @@
 # Set base image to alpine
-FROM node:20.18-alpine AS builder
+FROM node:20.12-alpine AS builder
 RUN apk add --update nodejs npm
 
 # Set working directory
@@ -10,12 +10,11 @@ COPY package*.json ./ ./
 COPY prisma ./prisma/
 
 # Install dependencies
-#RUN npm install @nestjs/core
-RUN yarn install --legacy-peer-deps
+RUN npm install --legacy-peer-deps
 # Copy source code
 COPY . .
 
-RUN yarn build
+RUN npm run build
 
 # Build Arguments
 ARG DATA_URI 
