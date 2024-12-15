@@ -1,5 +1,5 @@
 # Set base image to alpine
-FROM node:18-alpine AS builder
+FROM node:20.18-alpine AS builder
 RUN apk add --update nodejs npm
 
 # Set working directory
