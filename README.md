@@ -16,7 +16,7 @@ The backend flash-card-api works as an API for quick curriculum access and QR co
 
 ## Instalação
 
-> Thids project needed [Node.js](https://nodejs.org/) v20.18+ to work.
+> Thids project needed [Node.js](https://nodejs.org/) v20.12+ to work.
 >
 > Install dependencies and run:
 
