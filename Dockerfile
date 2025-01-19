@@ -31,7 +31,7 @@ ENV PORT=3131
 #RUN npm install -g prisma
 
 # Generate Prisma client
-#RUN npx prisma generate
+RUN npx prisma generate
 
 # Run Prisma migrations
 #RUN npx prisma migrate deploy
