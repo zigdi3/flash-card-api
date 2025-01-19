@@ -31,6 +31,7 @@ jobs:
       - name: Commit and create PR 🔀
         uses: zigdi3/pull-request-updater@0.2.1
         with:
+          node-version: '20.12.x'
           title: 'build(deps): Upgrade NPM packages (automated)'
           branch: 'build-deps-upgrade-npm-packages-automated'
           commit-message: 'build(deps): upgrade NPM packages (automated)'
