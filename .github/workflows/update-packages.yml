@@ -17,6 +17,11 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v2
 
+      - name: Criar nova branch 🌿
+        run: |
+          git checkout -b build-deps-upgrade-npm-packages-automated
+          git push -u origin build-deps-upgrade-npm-packages-automated
+
       - name: Set up Node.js ⚙️
         uses: actions/setup-node@v3
         with:
@@ -27,8 +32,14 @@ jobs:
 
       - name: Clean cache
         run: npm cache clean --force
+        
+      - name: Commit changes 📝
+        run: |
+          git add .
+          git commit -m 'build(deps): upgrade NPM packages (automated)'
+          git push
 
-      - name: Commit and create PR 🔀
+      - name: Create Pull Request 🔀
         uses: peter-evans/create-pull-request@v7
         with:
           title: 'build(deps): Upgrade NPM packages (automated)'
