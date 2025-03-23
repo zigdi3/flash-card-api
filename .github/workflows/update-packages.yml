@@ -13,12 +13,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      
     
       - name: Checkout 🛎️
         uses: actions/checkout@v2
 
       - name: Criar nova branch 🌿
         run: |
+          git fetch -p
+          git pull
           git checkout -b build-deps-upgrade-npm-packages-automated
           git push -u origin build-deps-upgrade-npm-packages-automated
 
