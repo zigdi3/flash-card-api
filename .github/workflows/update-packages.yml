@@ -1,56 +1,76 @@
-name: Upgrade NPM packages
+name: Update Node Dependencies
 
 on:
+  schedule:
+    # Run weekly on Monday at 1:00 AM UTC
+    - cron: '0 1 * * 1'
+  # Allow manual triggering
   workflow_dispatch:
 
-  schedule:
-    - cron:  "0 0 * * 0"
-
 jobs:
-  upgrade-packages:
-    name: Upgrade packages
-
+  update-dependencies:
     runs-on: ubuntu-latest
-
     steps:
-      
-    
-      - name: Checkout 🛎️
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Configurar Git 🔧
-        run: |
-          git config --global user.name 'GitHub Actions'
-          git config --global user.email 'actions@github.com'
-
-      - name: Criar nova branch com timestamp 🌿
-        run: |
-          # Criando nome único de branch com timestamp para evitar conflitos
-          BRANCH_NAME="build-deps-upgrade-$(date +'%Y%m%d-%H%M%S')"
-          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
-          git checkout -b $BRANCH_NAME
-
-      - name: Set up Node.js ⚙️
-        uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '20.12.x'
-          
-      - name: Upgrade packages 🔀
-        run: npm update 
+          node-version: '20.14'
+          cache: 'npm'
 
-      - name: Clean cache
-        run: npm cache clean --force
-        
-      - name: Commit changes 📝
+      - name: Set Git user
         run: |
-          git add .
-          git commit -m 'build(deps): upgrade NPM packages (automated)'
-          git push -u origin $BRANCH_NAME
+          git config --global user.name "Diego Araujo"
+          git config --global user.email "diegozigoto@gmail.com"
 
-      - name: Create Pull Request 🔀
-        uses: peter-evans/create-pull-request@v7
+      - name: Create branch name with timestamp
+        id: branch-name
+        run: echo "branch=dependency-update-$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Create new branch
+        run: git checkout -b ${{ steps.branch-name.outputs.branch }}
+
+      - name: Update dependencies
+        run: |
+          # Update dependencies to their latest versions
+          npm update --save
+          # Update dev dependencies to their latest versions
+          npm update --save-dev
+
+      - name: Check for changes
+        id: check-changes
+        run: |
+          if [[ -z $(git status -s) ]]; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit changes if any
+        if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          git add package.json package-lock.json
+          git commit -m "Update Node.js dependencies"
+          git push --force --set-upstream origin ${{ steps.branch-name.outputs.branch }}
+
+      - name: Create Pull Request
+        if: steps.check-changes.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v5
         with:
-          title: 'build(deps): Upgrade NPM packages (automated)'
-          branch: ${{ env.BRANCH_NAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: 'Update Node.js dependencies'
+          body: |
+            This PR updates Node.js dependencies to their latest versions.
+
+            **Changes:**
+            - Automatic dependency updates from npm update
+            - Updates both production and development dependencies
+
+            This update was performed automatically by GitHub Actions.
+          branch: ${{ steps.branch-name.outputs.branch }}
           base: main
-          commit-message: 'build(deps): upgrade NPM packages (automated)'
+          labels: |
+            dependencies
+            automated-pr
