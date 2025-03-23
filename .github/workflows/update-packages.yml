@@ -23,7 +23,6 @@ jobs:
           git fetch -p
           git pull
           git checkout -b build-deps-upgrade-npm-packages-automated
-          git push -u origin build-deps-upgrade-npm-packages-automated
 
       - name: Set up Node.js ⚙️
         uses: actions/setup-node@v3
