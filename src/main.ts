@@ -22,7 +22,8 @@ async function bootstrap() {
   const port = 3131;
   await app.listen(port, () => {
     // logger.log(`Application is running on: ${await app.getUrl()}`);
-    // console.log(`API running on port: ${port} `), spin.onModuleInit();
+     console.log(`API running on port: ${port} `);
+      // spin.onModuleInit();
   });
 }
 //run app
