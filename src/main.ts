@@ -23,6 +23,7 @@ async function bootstrap() {
   await app.listen(port, () => {
     // logger.log(`Application is running on: ${await app.getUrl()}`);
      console.log(`API running on port: ${port} `);
+     console.log(`API docs on : http://localhost:3131/api-docs/# `);
       // spin.onModuleInit();
   });
 }
